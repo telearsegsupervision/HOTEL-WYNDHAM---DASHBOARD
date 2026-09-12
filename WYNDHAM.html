@@ -519,7 +519,7 @@
       </div>
       <div class="nav-item" data-view="estaciones">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>
-        Sectores y Propiedades
+        Sectores y Perímetros
       </div>
       <div class="nav-item" data-view="estadistica">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/></svg>
@@ -531,7 +531,7 @@
       </div>
     </nav>
 
-    <div class="nav-note"><b>Cliente:</b> WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER · <b>Fuente de datos:</b> Google Sheets — hojas por propiedad. Vea la nota sobre actualización arriba de la tabla.</div>
+    <div class="nav-note"><b>Cliente:</b> WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER · <b>Fuente de datos:</b> Google Sheets — hojas por perímetro. Vea la nota sobre actualización arriba de la tabla.</div>
 
     <div class="theme-switch">
       <div class="user-chip-label">
@@ -550,7 +550,7 @@
     <div class="topbar">
       <div>
         <h1>Panel de Monitoreo — WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER</h1>
-        <p class="sub">Monitoreo de camaroneras y propiedades</p>
+        <p class="sub">Monitoreo de perímetros</p>
       </div>
       <div class="topbar-right">
         <div class="pill" style="font-weight:700;letter-spacing:.4px;">
@@ -581,7 +581,7 @@
 
       <div class="source-line">
         <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-        Datos en vivo desde Google Sheets (hojas por propiedad de WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a> · <a href="https://docs.google.com/spreadsheets/d/1caP3xtqm5Wg-3eXZpHvLsB6j1p-0l5MXCSkJAFBwz_M/edit?usp=sharing" target="_blank" rel="noopener">ver hoja de cálculo</a>
+        Datos en vivo desde Google Sheets (hojas por perímetro de WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a> · <a href="https://docs.google.com/spreadsheets/d/1caP3xtqm5Wg-3eXZpHvLsB6j1p-0l5MXCSkJAFBwz_M/edit?usp=sharing" target="_blank" rel="noopener">ver hoja de cálculo</a>
       </div>
 
       <div class="filters">
@@ -640,8 +640,8 @@
 
       <div class="grid-2">
         <div class="panel">
-          <h2>Propiedades con más incidentes</h2>
-          <p class="panel-sub" id="subProps">Top 8 camaroneras / propiedades</p>
+          <h2>Perímetros con más incidentes</h2>
+          <p class="panel-sub" id="subProps">Top 8 perímetros</p>
           <div class="panel-body" id="barProp"></div>
         </div>
         <div class="panel">
@@ -678,7 +678,7 @@
             </colgroup>
             <thead>
               <tr>
-                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Propiedad</th><th>Perímetro</th><th>NT</th>
+                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
                 <th>Tipo</th><th>Descripción</th><th>Involucrado</th><th>Nivel</th><th>Operador</th><th>Acción adoptada</th>
               </tr>
             </thead>
@@ -743,7 +743,7 @@
           <table>
             <thead>
               <tr>
-                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Propiedad</th><th>Perímetro</th><th>NT</th>
+                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
                 <th>Tipo</th><th>Descripción</th><th>Involucrado</th><th>Nivel</th><th>Operador</th><th>Acción adoptada</th>
               </tr>
             </thead>
@@ -762,11 +762,11 @@
         <div class="estad-hero-top">
           <div>
             <div class="estad-eyebrow">Cobertura operativa · Portafolio 2026</div>
-            <h2 class="estad-title">Sectores y propiedades bajo monitoreo</h2>
+            <h2 class="estad-title">Perímetros bajo monitoreo</h2>
           </div>
           <div class="estad-hero-total">
             <span class="estad-hero-num num" id="estHeroTotal">0</span>
-            <span class="estad-hero-label" id="estHeroLabel">propiedades activas</span>
+            <span class="estad-hero-label" id="estHeroLabel">perímetros activos</span>
           </div>
         </div>
         <p class="estad-insight" id="estInsight">Calculando…</p>
@@ -775,7 +775,7 @@
       <div class="kpis" id="estKpiRow" style="grid-template-columns:repeat(5,1fr);"></div>
 
       <div class="panel">
-        <h2>Propiedades con más incidentes</h2>
+        <h2>Perímetros con más incidentes</h2>
         <p class="panel-sub">Top 8 en toda la operación, todos los sectores</p>
         <div class="panel-body" id="topPropsPanel" style="align-items:stretch;"></div>
       </div>
@@ -1160,14 +1160,14 @@
   }
   function updatePropOptionsForSector(sectorSelectEl, propSelectEl){
     var prev = propSelectEl.value;
-    fillSelect(propSelectEl, propsForSector(sectorSelectEl.value), "Todas las propiedades");
+    fillSelect(propSelectEl, propsForSector(sectorSelectEl.value), "Todos los perímetros");
     var stillValid = Array.prototype.some.call(propSelectEl.options, function(o){ return o.value === prev; });
     propSelectEl.value = stillValid ? prev : "";
   }
   function populateFilters(){
     estaciones = uniqueSorted(DATA.map(function(d){return d.estacion;}).concat(KNOWN_SECTORS));
     fillSelect(els.fCliente, uniqueSorted(DATA.map(function(d){return d.cliente;}).concat(ALWAYS_SHOW_CLIENTES)), "Todos los clientes");
-    fillSelect(els.fProp, propsForSector(els.fEst.value), "Todas las propiedades");
+    fillSelect(els.fProp, propsForSector(els.fEst.value), "Todos los perímetros");
     fillSelect(els.fTipo, uniqueSorted(DATA.map(function(d){return d.tipo;}).concat(ALWAYS_SHOW_TIPOS)), "Todos los tipos");
     renameOptionLabel(els.fTipo, "Sin clasificar", "OTROS");
     fillSelect(els.fNivel, NIVEL_ORDER.filter(function(n){ return ALWAYS_SHOW_NIVELES.indexOf(n) !== -1 || DATA.some(function(d){return d.nivel===n;}); }), "Todos los niveles");
@@ -1178,7 +1178,7 @@
     if (rEstEl){
       fillSelect(document.getElementById("rCliente"), uniqueSorted(DATA.map(function(d){return d.cliente;}).concat(ALWAYS_SHOW_CLIENTES)), "Todos los clientes");
       fillSelect(rEstEl, estaciones, "Todos los sectores");
-      fillSelect(document.getElementById("rProp"), propsForSector(rEstEl.value), "Todas las propiedades");
+      fillSelect(document.getElementById("rProp"), propsForSector(rEstEl.value), "Todos los perímetros");
       fillSelect(document.getElementById("rTipo"), uniqueSorted(DATA.map(function(d){return d.tipo;}).concat(ALWAYS_SHOW_TIPOS)), "Todos los tipos");
       renameOptionLabel(document.getElementById("rTipo"), "Sin clasificar", "OTROS");
       fillSelect(document.getElementById("rNivel"), NIVEL_ORDER.filter(function(n){ return ALWAYS_SHOW_NIVELES.indexOf(n) !== -1 || DATA.some(function(d){return d.nivel===n;}); }), "Todos los niveles");
@@ -1524,7 +1524,7 @@
     var operadoresActivos = uniqueSorted(rows.map(function(d){return d.op;})).length;
     els.kpiRow.innerHTML = "";
     els.kpiRow.appendChild(kpiCard("Total incidentes", rows.length, rows.length + " de " + DATA.length + " en total", "--blue-accent", ICONS.total, "--blue-accent-soft", "--blue-accent"));
-    els.kpiRow.appendChild(kpiCard("Propiedades monitoreadas", propsMonitoreadas, "con registros en el periodo", "--teal", ICONS.prop, "--blue-accent-soft", "--teal"));
+    els.kpiRow.appendChild(kpiCard("Perímetros monitoreados", propsMonitoreadas, "con registros en el periodo", "--teal", ICONS.prop, "--blue-accent-soft", "--teal"));
     els.kpiRow.appendChild(kpiCard("Operadores", operadoresActivos, "generaron registros", "--teal", ICONS.op, "--blue-accent-soft", "--teal"));
     els.kpiRow.appendChild(kpiCard("Riesgo alto", (byNivel.Alto||0), "requieren seguimiento", "--high", ICONS.alto, "--high-soft", "--high"));
     els.kpiRow.appendChild(kpiCard("Riesgo medio", (byNivel.Medio||0), "bajo monitoreo activo", "--warn", ICONS.medio, "--warn-soft", "--warn-text"));
@@ -1712,7 +1712,7 @@
     var avgPerProp = totalProps ? Math.round(totalIncidentes/totalProps) : 0;
 
     document.getElementById("estHeroTotal").textContent = totalProps;
-    document.getElementById("estHeroLabel").textContent = "propiedades activas en " + estaciones.length + (estaciones.length === 1 ? " sector" : " sectores");
+    document.getElementById("estHeroLabel").textContent = "perímetros activos en " + estaciones.length + (estaciones.length === 1 ? " sector" : " sectores");
 
     var insight = "";
     if (topEst) {
@@ -1720,17 +1720,17 @@
       insight += "<b>" + topEst[0] + "</b> concentra el <b>" + pctEst + "%</b> de los incidentes (" + topEst[1] + " de " + totalIncidentes + "). ";
     }
     if (topProp) {
-      insight += "<b>" + topProp[0] + "</b> es la propiedad con más incidentes registrados (" + topProp[1] + "). ";
+      insight += "<b>" + topProp[0] + "</b> es el perímetro con más incidentes registrados (" + topProp[1] + "). ";
     }
-    insight += "En promedio, cada propiedad acumula <b>" + avgPerProp + "</b> incidentes.";
+    insight += "En promedio, cada perímetro acumula <b>" + avgPerProp + "</b> incidentes.";
     document.getElementById("estInsight").innerHTML = insight;
 
     var kpiRow = document.getElementById("estKpiRow");
     kpiRow.innerHTML = "";
     kpiRow.appendChild(kpiCard("Sectores activos", estaciones.length, "con incidentes registrados", "--blue-accent", ICONS.total, "--blue-accent-soft", "--blue-accent"));
-    kpiRow.appendChild(kpiCard("Propiedades monitoreadas", totalProps, "camaroneras y facilidades", "--navy-800", ICONS.asese, "--blue-accent-soft", "--blue-accent"));
-    kpiRow.appendChild(kpiCard("Promedio por propiedad", avgPerProp, "incidentes acumulados", "--blue-accent", ICONS.medio, "--blue-accent-soft", "--blue-accent"));
-    kpiRow.appendChild(kpiCard("Propiedad más activa", topProp ? topProp[1] : 0, topProp ? topProp[0] : "—", "--high", ICONS.alto, "--high-soft", "--high"));
+    kpiRow.appendChild(kpiCard("Cámaras en monitoreo", "42", "de 174 cámaras instaladas", "--navy-800", ICONS.asese, "--blue-accent-soft", "--blue-accent"));
+    kpiRow.appendChild(kpiCard("Promedio por perímetro", avgPerProp, "incidentes acumulados", "--blue-accent", ICONS.medio, "--blue-accent-soft", "--blue-accent"));
+    kpiRow.appendChild(kpiCard("Perímetro más activo", topProp ? topProp[1] : 0, topProp ? topProp[0] : "—", "--high", ICONS.alto, "--high-soft", "--high"));
     kpiRow.appendChild(kpiCard("Sector más activo", topEst ? topEst[1] : 0, topEst ? topEst[0] : "—", "--high", ICONS.alto, "--high-soft", "--high"));
 
     // Ranking top 8 propiedades (todas las estaciones)
@@ -1766,7 +1766,7 @@
           '<div class="prop-bar"><div class="prop-bar-fill" style="width:'+pct+'%"></div></div></div>';
       }).join("");
       card.innerHTML =
-        '<div class="est-card-head"><h3>'+est+'<span class="est-pct">'+pctOfTotal+'% del total</span></h3><span class="est-total">'+rowsEst.length+' incidentes · '+propsSorted.length+' propiedades</span></div>'+
+        '<div class="est-card-head"><h3>'+est+'<span class="est-pct">'+pctOfTotal+'% del total</span></h3><span class="est-total">'+rowsEst.length+' incidentes · '+propsSorted.length+' perímetros</span></div>'+
         '<div class="prop-grid">'+tilesHtml+'</div>';
       container.appendChild(card);
     });
