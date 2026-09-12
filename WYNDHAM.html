@@ -356,7 +356,9 @@
   .pill-est{
     display:inline-block;padding:3px 8px;border-radius:6px;font-size:10.5px;font-weight:700;
     background:var(--navy-800);color:#fff;letter-spacing:.2px;white-space:nowrap;
+    max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;
   }
+  #incidentsTable td{overflow:hidden;text-overflow:ellipsis;}
 
   .empty-state{padding:30px;text-align:center;color:var(--text-faint);font-size:13px;}
 
@@ -579,7 +581,7 @@
 
       <div class="source-line">
         <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-        Datos en vivo desde Google Sheets (hojas por propiedad de WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a>
+        Datos en vivo desde Google Sheets (hojas por propiedad de WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER) · se actualiza automáticamente cada 3 minutos · <a href="javascript:void(0)" id="btnRefreshNow">actualizar ahora</a> · <a href="https://docs.google.com/spreadsheets/d/1caP3xtqm5Wg-3eXZpHvLsB6j1p-0l5MXCSkJAFBwz_M/edit?usp=sharing" target="_blank" rel="noopener">ver hoja de cálculo</a>
       </div>
 
       <div class="filters">
@@ -592,7 +594,7 @@
           <select id="fEst"></select>
         </div>
         <div class="field">
-          <label for="fProp">Camaronera / Propiedad</label>
+          <label for="fProp">Perímetros</label>
           <select id="fProp"></select>
         </div>
         <div class="field">
@@ -667,7 +669,13 @@
           <span class="table-count" id="tableCount"></span>
         </div>
         <div class="table-scroll">
-          <table>
+          <table id="incidentsTable" style="table-layout:fixed;min-width:1500px;">
+            <colgroup>
+              <col style="width:44px;"><col style="width:110px;"><col style="width:72px;"><col style="width:76px;">
+              <col style="width:100px;"><col style="width:90px;"><col style="width:40px;"><col style="width:74px;">
+              <col style="width:190px;"><col style="width:110px;"><col style="width:70px;"><col style="width:100px;">
+              <col style="width:280px;">
+            </colgroup>
             <thead>
               <tr>
                 <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Propiedad</th><th>Perímetro</th><th>NT</th>
@@ -697,7 +705,7 @@
           <select id="rEst"></select>
         </div>
         <div class="field">
-          <label for="rProp">Camaronera / Propiedad</label>
+          <label for="rProp">Perímetros</label>
           <select id="rProp"></select>
         </div>
         <div class="field">
@@ -1057,7 +1065,7 @@
     DATA = RAW.map(function(r){
       return {
         n: r.n, estacion: r.estacion, fecha: r.dia, hora: r.hora,
-        prop: r.camaronera, cliente: clienteDe(r.camaronera), perim: r.perimetro, nt: r.nt, tipo: r.tipo,
+        prop: r.camaronera, cliente: "WYNDHAM MANTA SAIL PLAZA HOTEL AND CONVENTION CENTER", perim: r.perimetro, nt: r.nt, tipo: r.tipo,
         desc: r.descripcion, inv: r.involucrado, nivel: r.nivel,
         op: r.operador, accion: r.accion
       };
@@ -1548,7 +1556,7 @@
         var tr = document.createElement("tr");
         tr.innerHTML =
           '<td class="mono">'+r.n+'</td>'+
-          '<td><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
+          '<td title="'+r.estacion+'"><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
           '<td class="mono">'+r.fecha+'</td>'+
           '<td class="mono">'+r.hora+'</td>'+
           '<td>'+r.prop+'</td>'+
@@ -1666,7 +1674,7 @@
         var tr = document.createElement("tr");
         tr.innerHTML =
           '<td class="mono">'+r.n+'</td>'+
-          '<td><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
+          '<td title="'+r.estacion+'"><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
           '<td class="mono">'+r.fecha+'</td>'+
           '<td class="mono">'+r.hora+'</td>'+
           '<td>'+r.prop+'</td>'+
