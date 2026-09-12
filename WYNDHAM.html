@@ -519,7 +519,7 @@
       </div>
       <div class="nav-item" data-view="estaciones">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>
-        Sectores y Perímetros
+        Perímetros
       </div>
       <div class="nav-item" data-view="estadistica">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v5h5"/></svg>
@@ -627,8 +627,8 @@
 
       <div class="grid-2">
         <div class="panel">
-          <h2>Registros por sector</h2>
-          <p class="panel-sub" id="subEstaciones">Distribución entre sectores</p>
+          <h2>Registros por área</h2>
+          <p class="panel-sub" id="subEstaciones">Distribución entre áreas del hotel</p>
           <div class="panel-body" id="donutEst"></div>
         </div>
         <div class="panel">
@@ -671,14 +671,14 @@
         <div class="table-scroll">
           <table id="incidentsTable" style="table-layout:fixed;min-width:1500px;">
             <colgroup>
-              <col style="width:44px;"><col style="width:110px;"><col style="width:72px;"><col style="width:76px;">
+              <col style="width:44px;"><col style="width:72px;"><col style="width:76px;">
               <col style="width:100px;"><col style="width:90px;"><col style="width:40px;"><col style="width:74px;">
-              <col style="width:190px;"><col style="width:110px;"><col style="width:70px;"><col style="width:100px;">
+              <col style="width:300px;"><col style="width:110px;"><col style="width:70px;"><col style="width:100px;">
               <col style="width:280px;">
             </colgroup>
             <thead>
               <tr>
-                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
+                <th>N°</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
                 <th>Tipo</th><th>Descripción</th><th>Involucrado</th><th>Nivel</th><th>Operador</th><th>Acción adoptada</th>
               </tr>
             </thead>
@@ -743,7 +743,7 @@
           <table>
             <thead>
               <tr>
-                <th>N°</th><th>Sector</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
+                <th>N°</th><th>Fecha</th><th>Hora</th><th>Área</th><th>Perímetro</th><th>NT</th>
                 <th>Tipo</th><th>Descripción</th><th>Involucrado</th><th>Nivel</th><th>Operador</th><th>Acción adoptada</th>
               </tr>
             </thead>
@@ -772,11 +772,11 @@
         <p class="estad-insight" id="estInsight">Calculando…</p>
       </div>
 
-      <div class="kpis" id="estKpiRow" style="grid-template-columns:repeat(5,1fr);"></div>
+      <div class="kpis" id="estKpiRow" style="grid-template-columns:repeat(4,1fr);"></div>
 
       <div class="panel">
         <h2>Perímetros con más incidentes</h2>
-        <p class="panel-sub">Top 8 en toda la operación, todos los sectores</p>
+        <p class="panel-sub">Top 8 en toda la operación</p>
         <div class="panel-body" id="topPropsPanel" style="align-items:stretch;"></div>
       </div>
 
@@ -1532,7 +1532,7 @@
     els.kpiRow.appendChild(kpiCard("ASESE", (byTipo.ASESE||0), "actos sub estándares", "--navy-800", ICONS.asese, "--blue-accent-soft", "--blue-accent"));
     els.kpiRow.appendChild(kpiCard("CSESE", (byTipo.CSESE||0), "condiciones sub estándares", "--navy-700", ICONS.csese, "--blue-accent-soft", "--blue-accent"));
 
-    renderDonut(els.donutEst, countBy(rows, "estacion"), function(name, i){ return PALETTE[i % PALETTE.length]; }, "incid.");
+    renderDonut(els.donutEst, countBy(rows, "prop"), function(name, i){ return PALETTE[i % PALETTE.length]; }, "incid.");
     renderDonut(els.donutNivel, countBy(rows, "nivel"), function(name){ return NIVEL_COLOR[name] || "var(--text-faint)"; }, "incid.");
     renderBars(els.barProp, countBy(rows, "prop"), 8);
     renderHourChart(els.hourChart, rows);
@@ -1547,7 +1547,7 @@
     els.tbody.innerHTML = "";
     if (!rows.length){
       var trEmpty = document.createElement("tr");
-      trEmpty.innerHTML = '<td colspan="13" class="empty-state">No hay incidentes que coincidan con los filtros seleccionados.</td>';
+      trEmpty.innerHTML = '<td colspan="12" class="empty-state">No hay incidentes que coincidan con los filtros seleccionados.</td>';
       els.tbody.appendChild(trEmpty);
       els.tableFoot.style.display = "none";
     } else {
@@ -1556,7 +1556,6 @@
         var tr = document.createElement("tr");
         tr.innerHTML =
           '<td class="mono">'+r.n+'</td>'+
-          '<td title="'+r.estacion+'"><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
           '<td class="mono">'+r.fecha+'</td>'+
           '<td class="mono">'+r.hora+'</td>'+
           '<td>'+r.prop+'</td>'+
@@ -1589,7 +1588,7 @@
   });
 
   els.updatedLabel.textContent = "actualizado 30/08/2026";
-  els.footerNote.textContent = "Panel TeleArseg generado desde la matriz real de Google Sheets · " + DATA.length + " incidentes en " + estaciones.length + " sectores";
+  els.footerNote.textContent = "Panel TeleArseg generado desde la matriz real de Google Sheets · " + DATA.length + " incidentes registrados";
 
   function pad2(n){ return (n<10?"0":"")+n; }
 
@@ -1667,14 +1666,13 @@
     var tbody = document.getElementById("rTbody");
     tbody.innerHTML = "";
     if (!rows.length){
-      tbody.innerHTML = '<tr><td colspan="13" class="empty-state">No hay incidentes que coincidan con los filtros.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="12" class="empty-state">No hay incidentes que coincidan con los filtros.</td></tr>';
       document.getElementById("rFoot").style.display = "none";
     } else {
       rows.slice(0, rShown).forEach(function(r){
         var tr = document.createElement("tr");
         tr.innerHTML =
           '<td class="mono">'+r.n+'</td>'+
-          '<td title="'+r.estacion+'"><span class="pill-est">'+r.estacion.replace("ESTACION ","E")+'</span></td>'+
           '<td class="mono">'+r.fecha+'</td>'+
           '<td class="mono">'+r.hora+'</td>'+
           '<td>'+r.prop+'</td>'+
@@ -1712,13 +1710,9 @@
     var avgPerProp = totalProps ? Math.round(totalIncidentes/totalProps) : 0;
 
     document.getElementById("estHeroTotal").textContent = totalProps;
-    document.getElementById("estHeroLabel").textContent = "perímetros activos en " + estaciones.length + (estaciones.length === 1 ? " sector" : " sectores");
+    document.getElementById("estHeroLabel").textContent = "perímetros activos";
 
     var insight = "";
-    if (topEst) {
-      var pctEst = Math.round(topEst[1]/totalIncidentes*100);
-      insight += "<b>" + topEst[0] + "</b> concentra el <b>" + pctEst + "%</b> de los incidentes (" + topEst[1] + " de " + totalIncidentes + "). ";
-    }
     if (topProp) {
       insight += "<b>" + topProp[0] + "</b> es el perímetro con más incidentes registrados (" + topProp[1] + "). ";
     }
@@ -1727,11 +1721,10 @@
 
     var kpiRow = document.getElementById("estKpiRow");
     kpiRow.innerHTML = "";
-    kpiRow.appendChild(kpiCard("Sectores activos", estaciones.length, "con incidentes registrados", "--blue-accent", ICONS.total, "--blue-accent-soft", "--blue-accent"));
+    kpiRow.appendChild(kpiCard("Total incidentes", totalIncidentes, "registrados en el periodo", "--blue-accent", ICONS.total, "--blue-accent-soft", "--blue-accent"));
     kpiRow.appendChild(kpiCard("Cámaras en monitoreo", "42", "de 174 cámaras instaladas", "--navy-800", ICONS.asese, "--blue-accent-soft", "--blue-accent"));
     kpiRow.appendChild(kpiCard("Promedio por perímetro", avgPerProp, "incidentes acumulados", "--blue-accent", ICONS.medio, "--blue-accent-soft", "--blue-accent"));
     kpiRow.appendChild(kpiCard("Perímetro más activo", topProp ? topProp[1] : 0, topProp ? topProp[0] : "—", "--high", ICONS.alto, "--high-soft", "--high"));
-    kpiRow.appendChild(kpiCard("Sector más activo", topEst ? topEst[1] : 0, topEst ? topEst[0] : "—", "--high", ICONS.alto, "--high-soft", "--high"));
 
     // Ranking top 8 propiedades (todas las estaciones)
     var rankPanel = document.getElementById("topPropsPanel");
@@ -1920,7 +1913,7 @@
         '<div class="act-dot" style="background:'+dotColor+'"></div>'+
         '<div class="act-body">'+
           '<div class="act-title">'+d.desc+'</div>'+
-          '<div class="act-meta"><span class="pill-est">'+d.estacion.replace("ESTACION ","E")+'</span>&nbsp;'+
+          '<div class="act-meta">'+
             d.prop+' · '+d.perim+' &nbsp;·&nbsp; <span class="pill-tipo">'+d.tipo+'</span>&nbsp;'+
             '<span class="pill-nivel '+nivelPillClass(d.nivel)+'"><span class="dot"></span>'+d.nivel+'</span>&nbsp;·&nbsp;'+d.op+
           '</div>'+
@@ -1985,7 +1978,7 @@
     estacionesInited = false; renderEstaciones();
     estadisticaInited = false; renderEstadistica();
     actividadInited = false; renderActividad();
-    els.footerNote.textContent = "Panel TeleArseg — datos en vivo desde Google Sheets · " + DATA.length + " incidentes en " + estaciones.length + " sectores";
+    els.footerNote.textContent = "Panel TeleArseg — datos en vivo desde Google Sheets · " + DATA.length + " incidentes registrados";
     els.updatedLabel.textContent = "actualizado " + nowLabel();
   }
   var isRefreshing = false;
